@@ -1,0 +1,56 @@
+<resources>
+    <string name="app_name">Criminal Intent</string>
+    <string name="crime_title_hint">Enter a title for the crime.</string>
+    <string name="crime_title_label">Title</string>
+    <string name="crime_details_label">Details</string>
+    <string name="crime_solved_label">Solved</string>
+    <string name="crime_police_button">Contact\nPolice</string>
+    <string name="jump_first_button">Jump to First</string>
+    <string name="jump_last_button">Jump to Last</string>
+    <string name="crime_pager_page">page #</string>
+    <string name="date_picker_title">Date of crime: </string>
+    <string name="time_picker_title">Time of crime: </string>
+    <string name="date_picker_ok_button">OK</string>
+    <string name="crime">Crime</string>
+    <string name="new_crime">New Crime</string>
+    <string name="show_subtitle">Show Subtitle</string>
+    <string name="hide_subtitle">Hide subtitle</string>
+    <string name="delete_all_items">Delete All Items</string>
+    <plurals name="subtitle_format_plurals">
+        <item quantity="one">%1$d crime</item>
+        <item quantity="other">%1$d crimes</item>
+    </plurals>
+    <string name="crime_delete">Delete</string>
+    <string name="no_crimes">There\'re no crimes on the list now. \nPress ADD NEW CRIME to add a new crime \nor GENERATE CRIMES to randomly populate the list with new crimes.</string>
+
+    <string name="add_new_crime">Add New Crime</string>
+    <string name="generate_crimes">Generate Crimes</string>
+
+    <string name="crime_suspect_text">Choose suspect</string>
+    <string name="crime_suspect_call_desc">Call suspect</string>
+    <string name="crime_suspect_current_text">Current suspect: %s</string>
+    <string name="crime_report_text">Send Crime Report</string>
+
+    <string name="crime_report">%1$s!\nThe crime was discovered on %2$s. %3$s, and %4$s</string>
+    <string name="crime_report_solved">The case is solved</string>
+    <string name="crime_report_unsolved">The case is not solved</string>
+    <string name="crime_report_suspect">the suspect is %s.</string>
+    <string name="crime_report_no_suspect">there is no suspect.</string>
+    <string name="crime_report_subject">Criminal Intent Crime Report</string>
+    <string name="send_report">Send Crime Report via</string>
+
+    <string name="are_you_sure_dialog">Are you sure?</string>
+    <string name="how_many_crimes_generate_dialog">How many crimes to generate?</string>
+    <string name="clear_suspect_dialog">Would you like to clear out the suspect?</string>
+    <string name="error_dialog">Error</string>
+    <string name="no_phone_contact_dialog">There\'s no phone number associated with this contact!</string>
+    <string name="police_called_dialog">Police was called about %s</string>
+
+    <string name="crime_photo_button_description">Take a photo of the crime scene</string>
+    <string name="crime_photo_image_description">Crime scene photo (set)</string>
+    <string name="crime_photo_taken_description">The crime photo was successfully taken!</string>
+    <string name="crime_photo_no_image_description">Crime scene photo (not set)</string>
+    <string name="recycler_view_description">Criminal Intent Main Screen</string>
+    <string name="crime_solved_description">Crime is solved!</string>
+    <string name="contact_police_description">Contact Police about crime %s</string>
+</resources>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Intento Criminal</string>
+    <string name="crime_title_hint">Introduzca un título para el crimen.</string>
+    <string name="crime_title_label">Título</string>
+    <string name="crime_details_label">Detalles</string>
+    <string name="crime_solved_label">Solucionado</string>
+    <string name="crime_police_button">Contacta\na la Policia</string>
+    <string name="jump_first_button">Salta al prímero</string>
+    <string name="jump_last_button">Salta al último</string>
+    <string name="crime_pager_page">página #</string>
+    <string name="date_picker_title">Fecha del crimen: </string>
+    <string name="time_picker_title">Tiempo del crimen: </string>
+    <string name="date_picker_ok_button">OK</string>
+    <string name="crime">Crimen</string>
+    <string name="new_crime">Nuevo Crimen</string>
+    <string name="show_subtitle">Mostrar Subtítulo</string>
+    <string name="hide_subtitle">Ocultar subtítulos</string>
+    <string name="delete_all_items">Eleminar todos los crímenes</string>
+    <plurals name="subtitle_format_plurals">
+        <item quantity="one">%1$d crime</item>
+        <item quantity="other">%1$d crimes</item>
+    </plurals>
+    <string name="crime_delete">Eliminar</string>
+    <string name="no_crimes">No hay crímenes en la lista ahora. \nPresione AGREGAR NUEVO CRIMEN para agregar un nuevo crimen \no GENERAR CRIMENES para poblar aleatoriamente la lista con nuevos crímenes.</string>
+
+    <string name="add_new_crime">Agregar Nuevo Crimen</string>
+    <string name="generate_crimes">Generar Crímenes</string>
+
+    <string name="crime_suspect_text">Elegir Sospechoso</string>
+    <string name="crime_suspect_call_desc">Llamar Sospechoso</string>
+    <string name="crime_suspect_current_text">Sospechoso actual: %s</string>
+    <string name="crime_report_text">Enviar Informe de Crimen</string>
+
+    <string name="crime_report">%1$s!\nEl crimen fue descubierto en %2$s. %3$s y %4$s</string>
+    <string name="crime_report_solved">El caso esta resuelto</string>
+    <string name="crime_report_unsolved">El caso no está resuelto</string>
+    <string name="crime_report_suspect">el sospechoso es %s.</string>
+    <string name="crime_report_no_suspect">no hay sospechoso.</string>
+    <string name="crime_report_subject">Intento Criminal Informe de Crimen</string>
+    <string name="send_report">Enviar informe de crimen a través de</string>
+
+    <string name="are_you_sure_dialog">¿Estás seguro?</string>
+    <string name="clear_suspect_dialog">¿Te gustaría limpiar al sospechoso?</string>
+    <string name="how_many_crimes_generate_dialog">¿Cuántos crimenes generar?</string>
+    <string name="error_dialog">Error</string>
+    <string name="no_phone_contact_dialog">" ¡No hay un número de teléfono asociado con este contacto!"</string>
+    <string name="police_called_dialog">Se llamó a la policía sobre %s</string>
+
+    <string name="crime_photo_button_description">Tomar una photo de la escena del crimen</string>
+    <string name="crime_photo_image_description">Photo de la escena del crimen (establecido)</string>
+    <string name="crime_photo_taken_description">¡La foto del crimen fue tomada con éxito!</string>
+    <string name="crime_photo_no_image_description">Photo de la escena del crimen (no establecido)</string>
+    <string name="recycler_view_description">Pantalla principal de Intento Criminal</string>
+    <string name="crime_solved_description">¡El crimen está resuelto!</string>
+    <string name="contact_police_description">Contacta a la policía sobre el crimen %s</string>
+</resources>
