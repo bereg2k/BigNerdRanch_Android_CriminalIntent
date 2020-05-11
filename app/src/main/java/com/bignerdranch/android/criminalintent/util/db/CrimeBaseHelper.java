@@ -1,10 +1,10 @@
-package com.bignerdranch.android.criminalintent.db;
+package com.bignerdranch.android.criminalintent.util.db;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.bignerdranch.android.criminalintent.db.CrimeDbSchema.CrimeTable;
+import com.bignerdranch.android.criminalintent.util.db.CrimeDbSchema.CrimeTable;
 
 public class CrimeBaseHelper extends SQLiteOpenHelper {
     private static final int VERSION = 1;

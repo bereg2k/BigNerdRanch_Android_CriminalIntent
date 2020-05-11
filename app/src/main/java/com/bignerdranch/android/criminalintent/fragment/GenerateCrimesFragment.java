@@ -1,4 +1,4 @@
-package com.bignerdranch.android.criminalintent;
+package com.bignerdranch.android.criminalintent.fragment;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -8,8 +8,6 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
@@ -17,7 +15,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
+
+import com.bignerdranch.android.criminalintent.R;
+import com.bignerdranch.android.criminalintent.model.CrimeLab;
 
 public class GenerateCrimesFragment extends DialogFragment {
     private static final int DEFAULT_CRIMES_GENERATE = 1;

@@ -1,10 +1,10 @@
-package com.bignerdranch.android.criminalintent.db;
+package com.bignerdranch.android.criminalintent.util.db;
 
 import android.database.Cursor;
 import android.database.CursorWrapper;
 
-import com.bignerdranch.android.criminalintent.Crime;
-import com.bignerdranch.android.criminalintent.db.CrimeDbSchema.CrimeTable;
+import com.bignerdranch.android.criminalintent.model.Crime;
+import com.bignerdranch.android.criminalintent.util.db.CrimeDbSchema.CrimeTable;
 
 import java.util.Date;
 import java.util.UUID;

@@ -1,4 +1,4 @@
-package com.bignerdranch.android.criminalintent;
+package com.bignerdranch.android.criminalintent.fragment;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -15,6 +15,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
+
+import com.bignerdranch.android.criminalintent.R;
 
 import java.util.Calendar;
 import java.util.Date;

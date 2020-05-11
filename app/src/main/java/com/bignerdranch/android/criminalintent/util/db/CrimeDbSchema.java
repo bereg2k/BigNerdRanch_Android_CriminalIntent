@@ -1,4 +1,4 @@
-package com.bignerdranch.android.criminalintent.db;
+package com.bignerdranch.android.criminalintent.util.db;
 
 public class CrimeDbSchema {
     public static final class CrimeTable{

@@ -1,11 +1,10 @@
-package com.bignerdranch.android.criminalintent;
+package com.bignerdranch.android.criminalintent.activity;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,8 +17,12 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.bignerdranch.android.criminalintent.R;
+import com.bignerdranch.android.criminalintent.fragment.CrimeFragment;
+import com.bignerdranch.android.criminalintent.model.Crime;
+import com.bignerdranch.android.criminalintent.model.CrimeLab;
+
 import java.util.List;
-import java.util.Objects;
 import java.util.UUID;
 
 public class CrimePagerActivity extends AppCompatActivity implements CrimeFragment.Callbacks {

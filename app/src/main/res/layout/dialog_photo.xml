@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ImageView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/photo_preview_image_view"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:background="@android:color/darker_gray"
-    android:cropToPadding="true"
-    android:scaleType="centerInside" />
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/photo_preview_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPhotoBackground">
+
+    <ImageView
+        android:id="@+id/photo_preview_image_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:cropToPadding="true"
+        android:scaleType="centerInside" />
+</FrameLayout>

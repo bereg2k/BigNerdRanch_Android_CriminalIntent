@@ -1,8 +1,13 @@
-package com.bignerdranch.android.criminalintent;
+package com.bignerdranch.android.criminalintent.activity;
 
 import android.content.Intent;
 
 import androidx.fragment.app.Fragment;
+
+import com.bignerdranch.android.criminalintent.model.Crime;
+import com.bignerdranch.android.criminalintent.fragment.CrimeFragment;
+import com.bignerdranch.android.criminalintent.fragment.CrimeListFragment;
+import com.bignerdranch.android.criminalintent.R;
 
 public class CrimeListActivity extends SingleFragmentActivity implements CrimeListFragment.Callbacks,
         CrimeFragment.Callbacks {

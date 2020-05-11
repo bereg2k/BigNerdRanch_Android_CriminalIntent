@@ -1,4 +1,4 @@
-package com.bignerdranch.android.criminalintent;
+package com.bignerdranch.android.criminalintent.fragment;
 
 import android.Manifest;
 import android.app.Activity;
@@ -11,7 +11,6 @@ import android.content.res.Configuration;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Point;
-import android.media.browse.MediaBrowser;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
@@ -20,7 +19,6 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
@@ -35,15 +33,22 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.app.ActivityOptionsCompat;
 import androidx.core.app.ShareCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.bignerdranch.android.criminalintent.R;
+import com.bignerdranch.android.criminalintent.activity.CrimePhotoViewerActivity;
+import com.bignerdranch.android.criminalintent.activity.DatePickerActivity;
+import com.bignerdranch.android.criminalintent.model.Crime;
+import com.bignerdranch.android.criminalintent.model.CrimeLab;
+import com.bignerdranch.android.criminalintent.util.PictureUtils;
+
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOError;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -52,7 +57,9 @@ import java.util.Locale;
 import java.util.Objects;
 import java.util.UUID;
 
-import static android.widget.CompoundButton.*;
+import static android.widget.CompoundButton.OnCheckedChangeListener;
+import static android.widget.CompoundButton.OnClickListener;
+import static android.widget.CompoundButton.OnLongClickListener;
 
 public class CrimeFragment extends Fragment {
 
@@ -108,6 +115,7 @@ public class CrimeFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        postponeEnterTransition();
 
         UUID crimeId = (UUID) getArguments().getSerializable(ARG_CRIME_ID);
         mCrime = CrimeLab.get(getActivity()).getCrime(crimeId);
@@ -142,9 +150,9 @@ public class CrimeFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_crime, container, false);
+        View view = inflater.inflate(R.layout.fragment_crime, container, false);
 
-        mTitleField = v.findViewById(R.id.crime_title);
+        mTitleField = view.findViewById(R.id.crime_title);
         mTitleField.setText(mCrime.getTitle());
         mTitleField.addTextChangedListener(new TextWatcher() {
             @Override
@@ -164,7 +172,7 @@ public class CrimeFragment extends Fragment {
             }
         });
 
-        mDateButton = v.findViewById(R.id.crime_date);
+        mDateButton = view.findViewById(R.id.crime_date);
         updateDate();
         mDateButton.setOnClickListener(new OnClickListener() {
             @Override
@@ -180,7 +188,7 @@ public class CrimeFragment extends Fragment {
             }
         });
 
-        mTimeButton = v.findViewById(R.id.crime_time);
+        mTimeButton = view.findViewById(R.id.crime_time);
         updateTime();
         mTimeButton.setOnClickListener(new OnClickListener() {
             @Override
@@ -192,7 +200,7 @@ public class CrimeFragment extends Fragment {
             }
         });
 
-        mSolvedCheckBox = v.findViewById(R.id.crime_solved);
+        mSolvedCheckBox = view.findViewById(R.id.crime_solved);
         mSolvedCheckBox.setChecked(mCrime.isSolved());
         mSolvedCheckBox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
             @Override
@@ -203,7 +211,7 @@ public class CrimeFragment extends Fragment {
             }
         });
 
-        mDeleteTextView = v.findViewById(R.id.delete_text_view);
+        mDeleteTextView = view.findViewById(R.id.delete_text_view);
         mDeleteTextView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -227,7 +235,7 @@ public class CrimeFragment extends Fragment {
         });
 
         final Intent pickContactIntent = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
-        mSuspectButton = v.findViewById(R.id.choose_suspect);
+        mSuspectButton = view.findViewById(R.id.choose_suspect);
         mSuspectButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -272,7 +280,7 @@ public class CrimeFragment extends Fragment {
             mSuspectButton.setEnabled(false);
         }
 
-        mCallSuspectButton = v.findViewById(R.id.call_suspect);
+        mCallSuspectButton = view.findViewById(R.id.call_suspect);
         mCallSuspectButton.setVisibility(mCrime.getSuspect() != null ? View.VISIBLE : View.GONE);
         mCallSuspectButton.setOnClickListener(new OnClickListener() {
             @Override
@@ -286,7 +294,7 @@ public class CrimeFragment extends Fragment {
             }
         });
 
-        mReportButton = v.findViewById(R.id.crime_report);
+        mReportButton = view.findViewById(R.id.crime_report);
         mReportButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -302,22 +310,19 @@ public class CrimeFragment extends Fragment {
         });
 
 
-        mPhotoView = v.findViewById(R.id.crime_photo);
-        mPhotoView.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mPhotoFile == null || !mPhotoFile.exists()) {
-                    return;
-                }
-
-                // show the dialog with large-sized image
-                FragmentManager manager = getFragmentManager();
-                CrimePhotoViewerFragment dialog = CrimePhotoViewerFragment.newInstance(mPhotoFile.getPath());
-                dialog.show(manager, DIALOG_PHOTO);
+        mPhotoView = view.findViewById(R.id.crime_photo);
+        mPhotoView.setTransitionName("image_details_" + getArguments().getSerializable(ARG_CRIME_ID).toString());
+        mPhotoView.setOnClickListener(photoView -> {
+            if (mPhotoFile == null || !mPhotoFile.exists()) {
+                return;
             }
+            Intent intent = CrimePhotoViewerActivity.newIntent(getActivity(), mPhotoFile.getPath(), photoView.getTransitionName());
+            ActivityOptionsCompat options = ActivityOptionsCompat
+                    .makeSceneTransitionAnimation(getActivity(), photoView, photoView.getTransitionName());
+            startActivity(intent, options.toBundle());
         });
 
-        mPhotoButton = v.findViewById(R.id.crime_camera);
+        mPhotoButton = view.findViewById(R.id.crime_camera);
         final Intent photoCaptureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
         mPhotoButton.setEnabled(mPhotoFile != null && photoCaptureIntent.resolveActivity(packageManager) != null);
@@ -338,18 +343,19 @@ public class CrimeFragment extends Fragment {
             }
         });
 
-        mPhotoView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                // getting actual size of the mPhotoView on the screen after layout pass
-                // this needs to be done for an effective photo scaling
-                mPhotoView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                mPhotoViewSize = new Point(mPhotoView.getWidth(), mPhotoView.getHeight());
-                updatePhotoView();
-            }
-        });
+        mPhotoView.getViewTreeObserver()
+                .addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                    @Override
+                    public void onGlobalLayout() {
+                        // getting actual size of the mPhotoView on the screen after layout pass
+                        // this needs to be done for an effective photo scaling
+                        mPhotoView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                        mPhotoViewSize = new Point(mPhotoView.getWidth(), mPhotoView.getHeight());
+                        updatePhotoView();
+                    }
+                });
 
-        return v;
+        return view;
     }
 
     @Override

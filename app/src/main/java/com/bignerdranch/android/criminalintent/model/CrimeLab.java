@@ -1,13 +1,14 @@
-package com.bignerdranch.android.criminalintent;
+package com.bignerdranch.android.criminalintent.model;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.bignerdranch.android.criminalintent.db.CrimeBaseHelper;
-import com.bignerdranch.android.criminalintent.db.CrimeCursorWrapper;
-import com.bignerdranch.android.criminalintent.db.CrimeDbSchema.CrimeTable;
+import com.bignerdranch.android.criminalintent.R;
+import com.bignerdranch.android.criminalintent.util.db.CrimeBaseHelper;
+import com.bignerdranch.android.criminalintent.util.db.CrimeCursorWrapper;
+import com.bignerdranch.android.criminalintent.util.db.CrimeDbSchema.CrimeTable;
 
 import java.io.File;
 import java.util.ArrayList;

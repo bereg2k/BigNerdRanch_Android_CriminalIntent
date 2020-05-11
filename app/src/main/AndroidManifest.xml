@@ -15,18 +15,24 @@
         android:roundIcon="@mipmap/ic_launcher_shield_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CrimeListActivity">
+        <activity android:name=".activity.CrimeListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".CrimePagerActivity"
-            android:parentActivityName=".CrimeListActivity"></activity>
+            android:name=".activity.CrimePagerActivity"
+            android:parentActivityName=".activity.CrimeListActivity" />
         <activity
-            android:name=".DatePickerActivity"
-            android:parentActivityName=".CrimePagerActivity" />
+            android:name=".activity.DatePickerActivity"
+            android:parentActivityName=".activity.CrimePagerActivity" />
+        <activity
+            android:name=".activity.CrimePhotoViewerActivity"
+            android:parentActivityName=".activity.CrimePagerActivity"
+            android:theme="@style/Theme.Transparent"
+            />
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.bignerdranch.android.criminalintent.fileprovider"

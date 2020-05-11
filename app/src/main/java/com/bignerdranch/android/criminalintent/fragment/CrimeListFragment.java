@@ -1,4 +1,4 @@
-package com.bignerdranch.android.criminalintent;
+package com.bignerdranch.android.criminalintent.fragment;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -23,6 +23,11 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bignerdranch.android.criminalintent.R;
+import com.bignerdranch.android.criminalintent.activity.CrimePagerActivity;
+import com.bignerdranch.android.criminalintent.model.Crime;
+import com.bignerdranch.android.criminalintent.model.CrimeLab;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
