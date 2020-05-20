@@ -581,6 +581,7 @@ public class CrimeFragment extends Fragment {
      */
     private void deleteCrime() {
         CrimeLab.get(getActivity()).removeCrime(mCrime);
+        CrimeLab.get(getActivity()).setCrimeDeleted(mCrime);
         mCallbacks.onCrimeDeleted(mCrime);
     }
 

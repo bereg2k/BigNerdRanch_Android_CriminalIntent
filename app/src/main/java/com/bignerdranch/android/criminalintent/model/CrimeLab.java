@@ -27,6 +27,8 @@ public class CrimeLab {
     private Context mContext;
     private SQLiteDatabase mDatabase;
 
+    private Crime mCrimeDeleted;
+
     /**
      * Public getter for CrimeLab instance (either create one if it doesn't exist, or provide the existing one
      *
@@ -95,6 +97,26 @@ public class CrimeLab {
         } finally {
             cursor.close();
         }
+    }
+
+    /**
+     * Getting a crime that was recently deleted
+     *
+     * @return recently deleted crime object
+     */
+    public Crime getCrimeDeleted() {
+        return mCrimeDeleted;
+    }
+
+    /**
+     * Setting a crime that was recently deleted.
+     * Clients MUST set null after processing a delete event
+     * to indicate that there're no recently deleted crimes anymore.
+     *
+     * @param crimeDeleted recently deleted crime object
+     */
+    public void setCrimeDeleted(Crime crimeDeleted) {
+        mCrimeDeleted = crimeDeleted;
     }
 
     /**

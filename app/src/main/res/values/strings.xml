@@ -4,6 +4,7 @@
     <string name="crime_title_label">Title</string>
     <string name="crime_details_label">Details</string>
     <string name="crime_solved_label">Solved</string>
+    <string name="undo">Undo</string>
     <string name="crime_police_button">Contact\nPolice</string>
     <string name="jump_first_button">Jump to First</string>
     <string name="jump_last_button">Jump to Last</string>
@@ -45,6 +46,7 @@
     <string name="error_dialog">Error</string>
     <string name="no_phone_contact_dialog">There\'s no phone number associated with this contact!</string>
     <string name="police_called_dialog">Police was called about %s</string>
+    <string name="crime_was_deleted">The crime \"%s\" was deleted!</string>
 
     <string name="crime_photo_button_description">Take a photo of the crime scene</string>
     <string name="crime_photo_image_description">Crime scene photo (set)</string>

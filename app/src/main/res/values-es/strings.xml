@@ -5,6 +5,7 @@
     <string name="crime_title_label">Título</string>
     <string name="crime_details_label">Detalles</string>
     <string name="crime_solved_label">Solucionado</string>
+    <string name="undo">Deshacer</string>
     <string name="crime_police_button">Contacta\na la Policia</string>
     <string name="jump_first_button">Salta al prímero</string>
     <string name="jump_last_button">Salta al último</string>
@@ -44,8 +45,9 @@
     <string name="clear_suspect_dialog">¿Te gustaría limpiar al sospechoso?</string>
     <string name="how_many_crimes_generate_dialog">¿Cuántos crimenes generar?</string>
     <string name="error_dialog">Error</string>
-    <string name="no_phone_contact_dialog">" ¡No hay un número de teléfono asociado con este contacto!"</string>
+    <string name="no_phone_contact_dialog">¡No hay un número de teléfono asociado con este contacto!</string>
     <string name="police_called_dialog">Se llamó a la policía sobre %s</string>
+    <string name="crime_was_deleted">¡El crimen \"%s\" fue eliminado!</string>
 
     <string name="crime_photo_button_description">Tomar una photo de la escena del crimen</string>
     <string name="crime_photo_image_description">Photo de la escena del crimen (establecido)</string>
@@ -54,4 +56,5 @@
     <string name="recycler_view_description">Pantalla principal de Intento Criminal</string>
     <string name="crime_solved_description">¡El crimen está resuelto!</string>
     <string name="contact_police_description">Contacta a la policía sobre el crimen %s</string>
+
 </resources>

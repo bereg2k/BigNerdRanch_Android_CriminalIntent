@@ -18,6 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -28,6 +29,8 @@ import com.bignerdranch.android.criminalintent.R;
 import com.bignerdranch.android.criminalintent.activity.CrimePagerActivity;
 import com.bignerdranch.android.criminalintent.model.Crime;
 import com.bignerdranch.android.criminalintent.model.CrimeLab;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -50,6 +53,8 @@ public class CrimeListFragment extends Fragment {
     private TextView mNoCrimesTextView;
     private Button mAddNewCrimeButton;
     private Button mGenerateCrimesButton;
+    private FloatingActionButton mFab;
+    private CoordinatorLayout mCoordinatorLayout;
 
     private Callbacks mCallbacks;
     private CrimeFragment.Callbacks mCrimeFragmentCallbacks;
@@ -166,6 +171,16 @@ public class CrimeListFragment extends Fragment {
             }
         });
 
+        mFab = view.findViewById(R.id.fab);
+        mFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addNewCrime();
+            }
+        });
+        mCoordinatorLayout = view.findViewById(R.id.coordinator_layout);
+//        mCoordinatorLayout.getLayoutTransition().disableTransitionType(LayoutTransition.APPEARING);
+//        mCoordinatorLayout.getLayoutTransition().disableTransitionType(LayoutTransition.DISAPPEARING);
         updateUI();
 
         setUpSwipeToDismiss();
@@ -193,6 +208,8 @@ public class CrimeListFragment extends Fragment {
 
         updateSubtitle();
         updateNoCrimesDialog();
+
+        checkCrimeDeleted();
     }
 
     /**
@@ -431,6 +448,7 @@ public class CrimeListFragment extends Fragment {
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        CrimeLab.get(getActivity()).setCrimeDeleted(crime);
                         CrimeLab.get(getActivity()).removeCrime(crime);
 
                         mCrimeFragmentCallbacks.onCrimeDeleted(crime);
@@ -466,27 +484,42 @@ public class CrimeListFragment extends Fragment {
     }
 
     /**
+     * Check current state of the crime list on deleted crimes in real time
+     */
+    private void checkCrimeDeleted() {
+        CrimeLab crimeLab = CrimeLab.get(getContext());
+        Crime deletedCrime = crimeLab.getCrimeDeleted();
+
+        if (deletedCrime != null) {
+            crimeLab.setCrimeDeleted(null);
+            showSnackbarUndoDelete(deletedCrime);
+        }
+    }
+
+    /**
+     * Show short pop-up message in form of snackbar on "delete a crime" event
+     * User can undo delete via standard snackbar action
+     *
+     * @param crime deleted crime
+     */
+    private void showSnackbarUndoDelete(Crime crime) {
+        Snackbar snackbar = Snackbar.make(mCoordinatorLayout,
+                getString(R.string.crime_was_deleted, crime.getTitle()),
+                Snackbar.LENGTH_LONG);
+        snackbar.setAction(R.string.undo, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CrimeLab.get(getActivity()).addCrime(crime);
+                mCrimeFragmentCallbacks.onCrimeUpdated(crime);
+            }
+        });
+        snackbar.show();
+    }
+
+    /**
      * Required interface for hosting activities.
      * Using that interface hosting activity can interact with its fragments.
      */
-    public interface Callbacks {
-        /**
-         * Method for selecting a single crime on the list.
-         * <p>
-         * Should either start a new {@link CrimePagerActivity} (for phones)
-         * or display the details of the selected crime on the adjacent separate fragment (for tablets)
-         * </p>
-         *
-         * @param crime a single {@link Crime} object that represents a single list entity
-         */
-        void onCrimeSelected(Crime crime);
-
-        /**
-         * Method for deleting all crimes from the list.
-         */
-        void onCrimeDeleted();
-    }
-
     private void setUpSwipeToDismiss() {
         ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new ItemTouchHelper.SimpleCallback(0, LEFT) {
             @Override
@@ -504,5 +537,25 @@ public class CrimeListFragment extends Fragment {
 
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(itemTouchHelperCallback);
         itemTouchHelper.attachToRecyclerView(mCrimeRecyclerView);
+    }
+
+    public interface Callbacks {
+
+        /**
+         * Method for selecting a single crime on the list.
+         * <p>
+         * Should either start a new {@link CrimePagerActivity} (for phones)
+         * or display the details of the selected crime on the adjacent separate fragment (for tablets)
+         * </p>
+         *
+         * @param crime a single {@link Crime} object that represents a single list entity
+         */
+        void onCrimeSelected(Crime crime);
+
+        /**
+         * Method for deleting all crimes from the list.
+         */
+        void onCrimeDeleted();
+
     }
 }
